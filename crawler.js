@@ -32,13 +32,13 @@ function movie_detail (url, cb) {
         let comments = [];
         $('#hot-comments > div.comment-item').each((index, comment_div) => {
             comments.push({
-                content: $(comment_div).find('.comment > p').text(),
+                content: $(comment_div).find('.comment > p').text().replace(/\n/, '').replace('\n', '').trim(),
                 author: $(comment_div).find('.comment-info > a').text()
             });
         });
 
         let data = {
-            url,
+            url: url.split('?')[0],
             name: $('#content > h1 > span:nth-child(1)').text(),
             score: +$('#interest_sectl > div.rating_wrap.clearbox > div.rating_self.clearfix > strong').text(),
             score_people: +$('#interest_sectl > div.rating_wrap.clearbox > div.rating_self.clearfix > div > div.rating_sum > a > span').text(),
